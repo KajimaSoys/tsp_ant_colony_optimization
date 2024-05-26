@@ -126,7 +126,12 @@ class TSPGUI:
             self.canvas.draw_idle()
 
 
+def quit(event):
+    root.quit()
+
+
 if __name__ == "__main__":
     root = tk.Tk()
+    root.bind('<Control-c>', quit)
     app = TSPGUI(root)
     root.mainloop()

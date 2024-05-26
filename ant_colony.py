@@ -112,7 +112,3 @@ class ACO(Base):
                 res_leng = best_leng
                 res_indx = tmp_indx[tmp_leng.index(best_leng)]
         return Path(indx=res_indx, leng=res_leng, name=name)
-
-
-# if __name__ == "__main__":
-#     pass
