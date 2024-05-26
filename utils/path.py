@@ -1,6 +1,3 @@
-# Path
-
-
 from dataclasses import dataclass
 
 

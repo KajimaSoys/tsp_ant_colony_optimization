@@ -1,6 +1,3 @@
-# Base
-
-
 from math import sqrt
 
 
@@ -30,5 +27,3 @@ class Base:
         """Calculates the distance matrix for the given 2D points."""
 
         return [[Base.__euclidean_dist(a, b) for b in points] for a in points]
-
-      

@@ -1,6 +1,3 @@
-  # Ant Colony Optimization
-
-
 from math import inf
 from random import random, shuffle
 from utils.base import Base
@@ -117,5 +114,5 @@ class ACO(Base):
         return Path(indx=res_indx, leng=res_leng, name=name)
 
 
-if __name__ == "__main__":
-    pass
+# if __name__ == "__main__":
+#     pass
