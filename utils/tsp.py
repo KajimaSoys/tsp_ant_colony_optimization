@@ -18,9 +18,10 @@ class TSP:
         "#eb9234",
     ]
 
-    def __init__(self, points: list[tuple[int, int]], paths: list[Path] = None):
-        """Initializes the problem with points and paths, if any."""
+    def __init__(self, points: list[tuple[int, int]], addresses: list[str] = None, paths: list[Path] = None):
+        """Initializes the problem with points, addresses and paths if any."""
         self._points = points
+        self._addresses = addresses if addresses is not None else [f"{i+1}" for i in range(len(points))]
         self._paths = paths if paths is not None else []
 
     def get_points(self) -> list[tuple[int, int]]:
@@ -44,8 +45,8 @@ class TSP:
     def __draw_points(self, ax) -> None:
         """Draws 2D points on the given axes."""
         ax.scatter(*array(self._points).T, zorder=1, color=self.CLR_POINT, label=f"Points ({len(self._points)})")
-        for i, p in enumerate(self._points):
-            ax.annotate(i + 1, p, ha="center", textcoords="offset points", xytext=(0, 4), fontsize=8)
+        for idx, (p, label) in enumerate(zip(self._points, self._addresses)):
+            ax.annotate(label, p, ha="center", textcoords="offset points", xytext=(0, 4), fontsize=8)
             ax.annotate(f"({p[0]}; {p[1]})", p, ha="center", va="top", textcoords="offset points", xytext=(0, -4), fontsize=6)
 
     def __draw_paths(self, ax) -> list[Line2D]:

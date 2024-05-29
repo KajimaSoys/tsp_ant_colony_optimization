@@ -2,15 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from typing import Optional, Any
 
-address_list = [
-    ("Улица Пушкина, дом 1", 100, 200),
-    ("Проезд Ленина, дом 2", 150, 400),
-    ("Улица Пушкина, дом 3", 440, 500),
-    ("Проезд Ленина, дом 4", 150, 700),
-    ("Улица Пушкина, дом 5", 330, 100),
-    ("Проезд Ленина, дом 6", 230, 800)
-]
-
 
 class AddressSelectionWindow:
     """
@@ -34,7 +25,7 @@ class AddressSelectionWindow:
         self.tree.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.tree.bind("<<TreeviewSelect>>", self.on_selection_change)
 
-        self.addresses: list[tuple[str, int, int]] = address_list
+        self.addresses: list[tuple[str, int, int]] = self.controller.address_list
         for address in self.addresses:
             self.tree.insert("", "end", values=address)
 

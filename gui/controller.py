@@ -13,19 +13,20 @@ class ApplicationController:
     The controller for the application, coordinating interactions between windows and data processing logic.
     """
 
-    def __init__(self):
+    def __init__(self, address_list: list[tuple[str, int, int]], ants: int, iterations: int, alpha: float, beta: float, p: float, q: float) -> None:
+        self.address_list = address_list
+        self.ants = ants
+        self.iterations = iterations
+        self.alpha = alpha
+        self.beta = beta
+        self.p = p
+        self.q = q
+
         self.root = tk.Tk()
         self.root2 = tk.Toplevel(self.root)
         self.address_window = AddressSelectionWindow(self.root, self)
         self.visualization_window = RouteVisualizationWindow(self.root2, self)
         self.settings_window = None
-
-        self.ants = 100
-        self.iterations = 20
-        self.alpha = 1.5
-        self.beta = 1.2
-        self.p = 0.6
-        self.q = 10
 
         self.points: Optional[list[tuple[int, int]]] = None
         self.tsp: Optional[TSP] = None
@@ -38,7 +39,8 @@ class ApplicationController:
     def update_points(self,  points: list[tuple[str]]) -> None:
         """Updates the points and creates a new TSP problem."""
         self.points = [(int(x), int(y)) for x, y in points]
-        self.tsp = TSP(self.points)
+        addresses = [addr for addr, _, _ in self.address_list]
+        self.tsp = TSP(self.points, addresses)
         self.update_route()
 
     def update_settings(self, ants: int, iter: int, a: float, b: float, p: float, q: float) -> None:
@@ -67,14 +69,14 @@ class ApplicationController:
             return best_path
         return None
 
-    def open_settings(self):
+    def open_settings(self) -> None:
         """Opens the settings window"""
         if not self.settings_window:
             self.settings_window = tk.Toplevel(self.root2)
             SettingsWindow(self.settings_window, self)
             self.settings_window.protocol("WM_DELETE_WINDOW", self.on_settings_close)
 
-    def on_settings_close(self):
+    def on_settings_close(self) -> None:
         """Change the settings_window to None to allow reopening of the settings window."""
         self.settings_window.destroy()
         self.settings_window = None
