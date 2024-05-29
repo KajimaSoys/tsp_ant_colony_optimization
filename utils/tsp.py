@@ -1,12 +1,6 @@
-from random import randint
 from numpy import array
 from matplotlib.lines import Line2D
 from utils.path import Path
-
-
-def generate_problem(count: int, canvas_size: int = 1000) -> list[tuple[int]]:
-    """Generates a list of random 2D points."""
-    return [(randint(0, canvas_size), randint(0, canvas_size)) for _ in range(count)]
 
 
 class TSP:
@@ -24,13 +18,13 @@ class TSP:
         "#eb9234",
     ]
 
-    def __init__(self, points: list[tuple[int]], paths: list[Path] = None):
+    def __init__(self, points: list[tuple[int, int]], paths: list[Path] = None):
         """Initializes the problem with points and paths, if any."""
         self._points = points
         self._paths = paths if paths is not None else []
 
-    def get_points(self) -> list[tuple[int]]:
-        """Returns the list of 2D points of the initialized problem."""
+    def get_points(self) -> list[tuple[int, int]]:
+        """Returns the list of 2D points of the initial ized problem."""
         return self._points
 
     def get_paths(self) -> list[Path]:
@@ -40,6 +34,8 @@ class TSP:
     def show(self, ax) -> None:
         """Visualizes the TSP data using the given axes."""
         ax.clear()
+        ax.set_xlim(0, 1000)
+        ax.set_ylim(0, 1000)
         self.__draw_points(ax)
         lines = self.__draw_paths(ax)
         self.__draw_legend(ax, lines)

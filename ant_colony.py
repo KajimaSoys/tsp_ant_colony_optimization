@@ -91,7 +91,7 @@ class ACO(Base):
                 pm[indx[j]][indx[j + 1]] += delta
                 pm[indx[j + 1]][indx[j]] += delta
 
-    def run(self, points: list[tuple[int]], name: str = None) -> Path:
+    def run(self, points: list[tuple[int, int]], name: str = None) -> Path:
         """Runs the algorithm for the given 2D points."""
 
         l = len(points)
