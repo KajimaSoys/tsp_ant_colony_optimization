@@ -17,7 +17,7 @@ class AddressSelectionWindow:
     Window for selecting addresses and their coordinates.
     """
 
-    def __init__(self, master: tk.Tk, controller: Any):
+    def __init__(self, master: tk.Tk, controller: Any) -> None:
         self.master = master
         self.controller = controller
         self.master.title("Выбор адресов")

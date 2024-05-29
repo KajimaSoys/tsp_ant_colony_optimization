@@ -12,7 +12,7 @@ class RouteVisualizationWindow:
     Window for visualizing the route with an option to open settings.
     """
 
-    def __init__(self, master: tk.Tk, controller):
+    def __init__(self, master: tk.Tk, controller) -> None:
         self.master = master
         self.controller = controller
         self.master.title("Визуализация маршрута")
@@ -32,8 +32,8 @@ class RouteVisualizationWindow:
 
         self.tsp: Optional[TSP] = None
 
-        # self.settings_button = ttk.Button(master, text="Изменение параметров", command=self.controller.open_settings)
-        # self.settings_button.pack(side=tk.TOP, pady=10)
+        self.settings_button = ttk.Button(master, text="Изменение параметров", command=self.controller.open_settings)
+        self.settings_button.pack(side=tk.TOP, pady=10)
 
     def update_route(self, path: Path, tsp: Optional[TSP]) -> None:
         """Updates the route graph and the route length label."""

@@ -79,5 +79,5 @@ def create_tooltip_icon(master: tk.Widget, text: str, row: int, column: int) -> 
     column (int): The grid column to place the tooltip icon.
     """
     icon = ttk.Label(master, text='?', font=('Arial', 12, 'bold'), foreground='black')
-    icon.grid(row=row, column=column, sticky='sw')
+    icon.grid(row=row, column=column, sticky='sw', ipadx=30)
     ToolTip(icon, text=text)

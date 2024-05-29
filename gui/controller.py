@@ -67,15 +67,14 @@ class ApplicationController:
             return best_path
         return None
 
-    # def open_settings(self):
-    #     if not self.settings_window:
-    #         self.settings_window = tk.Toplevel(self.root2)
-    #         SettingsWindow(self.settings_window, self)
-    #
-    # def apply_settings(self, ants, iterations, alpha, beta, p, q):
-    #     self.ants = ants
-    #     self.iterations = iterations
-    #     self.alpha = alpha
-    #     self.beta = beta
-    #     self.p = p
-    #     self.q = q
+    def open_settings(self):
+        """Opens the settings window"""
+        if not self.settings_window:
+            self.settings_window = tk.Toplevel(self.root2)
+            SettingsWindow(self.settings_window, self)
+            self.settings_window.protocol("WM_DELETE_WINDOW", self.on_settings_close)
+
+    def on_settings_close(self):
+        """Change the settings_window to None to allow reopening of the settings window."""
+        self.settings_window.destroy()
+        self.settings_window = None
