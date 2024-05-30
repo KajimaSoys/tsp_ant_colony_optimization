@@ -38,8 +38,8 @@ class ApplicationController:
 
     def update_points(self,  points: list[tuple[str]]) -> None:
         """Updates the points and creates a new TSP problem."""
-        self.points = [(int(x), int(y)) for x, y in points]
-        addresses = [addr for addr, _, _ in self.address_list]
+        self.points = [(int(x), int(y)) for _, x, y in points]
+        addresses = [addr for addr, _, _ in points]
         self.tsp = TSP(self.points, addresses)
         self.update_route()
 

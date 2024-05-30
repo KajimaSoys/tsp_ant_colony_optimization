@@ -19,21 +19,25 @@ class RouteVisualizationWindow:
 
         ttk.Label(master, text="Построение маршрута доставки").pack(side=tk.TOP, pady=10)
 
-        self.fig = Figure(figsize=(6, 6))
+        self.graph_frame = ttk.Frame(master)
+        self.graph_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.controls_frame = ttk.Frame(master)
+        self.controls_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=10, pady=10)
+
+        self.fig = Figure(figsize=(10, 9))
         self.ax = self.fig.add_subplot(111)
         self.ax.set_xlim(0, 1000)
         self.ax.set_ylim(0, 1000)
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self.master)
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.graph_frame)
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-
-        self.route_length_label = ttk.Label(master, text="Длина маршрута: 0 м")
+        self.route_length_label = ttk.Label(self.graph_frame, text="Длина маршрута: 0 м")
         self.route_length_label.pack(side=tk.TOP, pady=10)
 
-        self.tsp: Optional[TSP] = None
-
-        self.settings_button = ttk.Button(master, text="Изменение параметров", command=self.controller.open_settings)
+        self.settings_button = ttk.Button(self.controls_frame, text="Изменение параметров", command=self.controller.open_settings)
         self.settings_button.pack(side=tk.TOP, pady=10)
+
+        self.tsp: Optional[TSP] = None
 
     def update_route(self, path: Path, tsp: Optional[TSP]) -> None:
         """Updates the route graph and the route length label."""

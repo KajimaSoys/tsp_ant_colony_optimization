@@ -20,8 +20,8 @@ class AddressSelectionWindow:
         self.tree.heading('x', text='X')
         self.tree.heading('y', text='Y')
         self.tree.column('name', width=200, anchor='w')
-        self.tree.column('x', width=100, anchor='center')
-        self.tree.column('y', width=100, anchor='center')
+        self.tree.column('x', width=50, anchor='center')
+        self.tree.column('y', width=50, anchor='center')
         self.tree.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.tree.bind("<<TreeviewSelect>>", self.on_selection_change)
 
@@ -35,6 +35,6 @@ class AddressSelectionWindow:
     def on_selection_change(self, event: Optional[tk.Event] = None) -> None:
         """Sends the selected addresses to the controller to update the route."""
         selected_items = self.tree.selection()
-        selected_points = [self.tree.item(item, 'values')[1:] for item in selected_items]
+        selected_points = [self.tree.item(item, 'values') for item in selected_items]
         self.selected_count_label.config(text=f"Выбрано адресов: {len(selected_items)}")
         self.controller.update_points(selected_points)
